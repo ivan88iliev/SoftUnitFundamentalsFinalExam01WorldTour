@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace SoftUnitFundamentalsFinalExam
+{
+    class Program
+    {
+        private static string casint;
+
+        static void Main(string[] args)
+        {
+            //SoftUnitFundamentalsFinalExam01WorldTour
+
+            string text = Console.ReadLine();
+
+            while (true)
+            {
+                string[] command = Console.ReadLine().Split(':', StringSplitOptions.RemoveEmptyEntries).ToArray();
+                if (command[0] == "Travel")
+                {
+                    break;
+                }
+                switch (command[0])
+                {
+                    case "Add Stop"://•	Add Stop:{index}:{string} 
+                        int validIndex = int.Parse(command[1]);
+                        if (validIndex >= 0 && validIndex < text.Length)
+                        {
+                            text = text.Insert(validIndex, command[2]);
+                        }
+                            Console.WriteLine(text);
+                        break;
+
+                    case "Remove Stop"://•	Remove Stop:{start_index}:{end_index}
+                        int start = int.Parse(command[1]);
+                        int final = int.Parse(command[2]);
+                        if (start >= 0 && start < text.Length && final < text.Length && final > 0)
+                        {
+                            text = text.Remove(start, final - start + 1);
+                        }
+                            Console.WriteLine(text);
+                        break;
+
+                    case "Switch"://•	Switch:{old_string}:{new_string}
+                        if (text.Contains(command[1]))
+                        {
+                            text = text.Replace(command[1], command[2]);
+                        }
+                            Console.WriteLine(text);
+                        break;
+                }
+
+            }
+            Console.WriteLine($"Ready for world tour! Planned stops: {text}");
+
+            //
+        }
+
+    }
+}
